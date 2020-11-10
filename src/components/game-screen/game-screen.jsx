@@ -7,7 +7,7 @@ import {GameType, MAX_MISTAKE_COUNT} from '../../const';
 import QuestionArtistScreen from "../question-artist-screen/question-artist-screen";
 import QuestionGenreScreen from "../question-genre-screen/question-genre-screen";
 import Mistakes from "../mistakes/mistakes";
-import {ActionCreator} from "../../store/action";
+import {incrementMistake, incrementStep, resetGame} from "../../store/action";
 
 import withActivePlayer from "../../hocs/with-active-player/with-active-player";
 import withUserAnswer from "../../hocs/with-user-answer/with-user-answer";
@@ -80,19 +80,19 @@ GameScreen.propTypes = {
   mistakes: PropTypes.number.isRequired
 };
 
-const mapStateToProps = (state) => ({
-  step: state.step,
-  mistakes: state.mistakes,
-  questions: state.questions
+const mapStateToProps = ({DATA, GAME}) => ({
+  step: GAME.step,
+  mistakes: GAME.mistakes,
+  questions: DATA.questions
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  resetGame() {
-    dispatch(ActionCreator.resetGame());
+  resetGameAction() {
+    dispatch(resetGame());
   },
   onUserAnswer(question, answer) {
-    dispatch(ActionCreator.incrementStep());
-    dispatch(ActionCreator.incrementMistake(question, answer));
+    dispatch(incrementStep());
+    dispatch(incrementMistake(question, answer));
   }
 });
 
