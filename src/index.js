@@ -6,14 +6,10 @@ import thunk from "redux-thunk";
 
 import App from "./components/app/app";
 import rootReducer from "./store/reducers";
-import {requireAuthorization} from "./store/action";
 import {fetchQuestionList} from "./store/api-actions/api-actions";
-import {AuthorizationStatus} from "./const";
 import {createAPI} from "./services/api";
 
-const api = createAPI(
-    () => store.dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH))
-);
+const api = createAPI();
 
 const store = createStore(
     rootReducer,
