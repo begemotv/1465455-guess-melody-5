@@ -28,5 +28,4 @@ const gameProcess = (state = initialState, action) => {
   }
 };
 
-
 export {gameProcess};

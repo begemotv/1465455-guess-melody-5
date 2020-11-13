@@ -12,6 +12,14 @@ const withActivePlayer = (Component) => {
       this.state = {
         activePlayerId: 0
       };
+
+      this.handleResetPlayer = this._handleResetPlayer.bind(this);
+    }
+
+    _handleResetPlayer() {
+      this.setState({
+        activePlayerId: 0,
+      });
     }
 
     render() {
@@ -19,6 +27,7 @@ const withActivePlayer = (Component) => {
 
       return <Component
         {...this.props}
+        onAnswerResetPlayer={this.handleResetPlayer}
         renderPlayer={(src, id) => {
           return (
             <AudioPlayer

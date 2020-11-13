@@ -9,7 +9,9 @@ import rootReducer from "./store/reducers";
 import {fetchQuestionList} from "./store/api-actions/api-actions";
 import {createAPI} from "./services/api";
 
-const api = createAPI();
+const api = createAPI(
+    () => store.dispatch()
+);
 
 const store = createStore(
     rootReducer,
