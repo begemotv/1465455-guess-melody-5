@@ -6,6 +6,7 @@ export const ActionType = {
   INCREMENT_STEP: `INCREMENT_STEP`,
   RESET_GAME: `RESET_GAME`,
   LOAD_QUESTIONS: `LOAD_QUESTIONS`,
+  REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
 };
 
 export const incrementStep = () => ({
@@ -40,3 +41,7 @@ export const loadQuestions = (questions) => ({
   payload: questions,
 });
 
+export const requireAuthorization = (status) => ({
+  type: ActionType.REQUIRED_AUTHORIZATION,
+  payload: status,
+});
