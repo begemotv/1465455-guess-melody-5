@@ -16,10 +16,15 @@ const withUserAnswer = (Component) => {
     }
 
     handleAnswer() {
-      const {onAnswer, question} = this.props;
+      const {onAnswer, onAnswerResetPlayer, question} = this.props;
       const {answers} = this.state;
 
       onAnswer(question, answers);
+      onAnswerResetPlayer();
+
+      this.setState({
+        answers: new Array(this.props.question.answers.length).fill(false),
+      });
     }
 
     handleChange(i, value) {
@@ -57,6 +62,7 @@ const withUserAnswer = (Component) => {
       type: PropTypes.oneOf([GameType.GENRE]).isRequired,
     }).isRequired,
     onAnswer: PropTypes.func.isRequired,
+    onAnswerResetPlayer: PropTypes.func.isRequired,
   };
 
   return WithUserAnswer;
