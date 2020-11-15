@@ -9,6 +9,7 @@ import QuestionGenreScreen from "../question-genre-screen/question-genre-screen"
 import Mistakes from "../mistakes/mistakes";
 import {incrementMistake, incrementStep, resetGame} from "../../store/action";
 
+import {AppRoute} from "../../const";
 import withActivePlayer from "../../hocs/with-active-player/with-active-player";
 import withUserAnswer from "../../hocs/with-user-answer/with-user-answer";
 
@@ -26,13 +27,13 @@ const GameScreen = (props) => {
 
   if (mistakes >= MAX_MISTAKE_COUNT) {
     return (
-      <Redirect to="/lose" />
+      <Redirect to={AppRoute.LOSE} />
     );
   }
 
   if (step >= questions.length || !question) {
     return (
-      <Redirect to="/result" />
+      <Redirect to={AppRoute.RESULT} />
     );
   }
 
@@ -40,6 +41,7 @@ const GameScreen = (props) => {
     case GameType.ARTIST:
       return (
         <QuestionArtistScreenHOC
+          key={step}
           question={question}
           onAnswer={onUserAnswer}
         >
@@ -49,6 +51,7 @@ const GameScreen = (props) => {
     case GameType.GENRE:
       return (
         <QuestionGenreScreenHOC
+          key={step}
           question={question}
           onAnswer={onUserAnswer}
         >
@@ -57,7 +60,7 @@ const GameScreen = (props) => {
       );
   }
 
-  return <Redirect to="/" />;
+  return <Redirect to={AppRoute.ROOT} />;
 };
 
 GameScreen.propTypes = {
